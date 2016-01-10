@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Clients</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link href="styles/main.css" rel="stylesheet" type="text/css" />
+    <script src="scripts/jquery-2.0.3.min.js"></script>
+    <script src="scripts/knockout-2.3.0.js"></script>
+    <script src="scripts/models/Clients.js" type="text/javascript"></script>
+
+</head>
+<body>
+    <div id="wrap">
+        <div id="header">
+            <script type="text/javascript">
+                $("#header").load("header.html");
+            </script>
+        </div>
+        <div id="main">
+            <div id="leftColumn" class="methodology" style="height: auto">
+                <div id="top" style="font-size: 1.2em;">IFC is collaborating with 314 financial institutions across 90 countries. By partnering with many types of financial intermediaries, including microfinance institutions, commercial banks, leasing companies, and private equity funds, IFC reaches many more small and medium enterprises that it could directly. Learn more about our clients.<br/></div>
+                <div style="margin: 20px 0; padding-left: 10px">
+                    <div data-bind="visible: sortedBy() == 'alphabet'"><a href="#A" data-bind="attr: {href : anchorA}">[A - D]</a>&nbsp;&nbsp;&nbsp;<a href="#E" data-bind="attr: {href : anchorE}">[E - H]</a>&nbsp;&nbsp;&nbsp;<a href="#I" data-bind="attr: {href : anchorI}">[I - L]</a>&nbsp;&nbsp;&nbsp;<a href="#M" data-bind="attr: {href : anchorM}">[M - P]</a>&nbsp;&nbsp;&nbsp;<a href="#Q" data-bind="attr: {href : anchorQ}">[Q - T]</a>&nbsp;&nbsp;&nbsp;<a href="#U" data-bind="attr: {href : anchorU}">[U - Z]</a></div>
+                    <div data-bind="visible: sortedBy() == 'type'"><a href="#MFI">[Microfinance Institution]</a>&nbsp;&nbsp;&nbsp;<a href="#SME">[SME Financial Institution]</a>&nbsp;&nbsp;&nbsp;<a href="#NON-MSME">[Non-MSME Financial Institution]</a></div>
+                    <div data-bind="visible: sortedBy() == 'region'">
+                        <!-- ko foreach: regions -->
+                            <a href="#" style="white-space: nowrap; margin-right: 10px" data-bind="text: '[' + $data + ']', attr: {href : '#' + $data.replace(/ /g, '')}"></a>
+                        <!-- /ko -->
+                    </div>
+                    </div>
+                <div style="padding-left: 10px">
+                    <div class="sortByDiv" data-bind="css: sortedBy() == 'alphabet' ? 'textSym' : 'linkSym'"><a data-bind="click: function() { sort('alphabet');}" href="#">[Sort by name]</a></div>
+                    <div class="sortByDiv" data-bind="css: sortedBy() == 'type' ? 'textSym' : 'linkSym'"><a data-bind="click: function() { sort('type');}" href="#">[Sort by type]</a></div>
+                    <div class="sortByDiv" data-bind="css: sortedBy() == 'region' ? 'textSym' : 'linkSym'"><a data-bind="click: function() { sort('region');}" href="#">[Sort by region]</a></div>
+                    <div class="clear" ></div>
+                </div>
+                <div data-bind="foreach: clientsData">
+                    <div class="clientDiv">
+                        <span data-bind="attr : {id : name.charAt(0)}"></span>
+                        <span data-bind="attr : {id : type}"></span>
+                        <span data-bind="attr : {id : region.replace(/ /g, '')}"></span>
+                        <div class="clientLogo">
+                            <!-- ko if: logo != '' && logo != undefined -->
+                            <img data-bind="click: $parent.imageClick, attr: {src: 'images/logos/' + logo}, style : { cursor: link != '' ? 'pointer' : 'default' }" />
+                            <!-- /ko -->
+                        </div>
+                        <div class="clientDescription">
+                            <div class="clientTitle">
+                                <a target="_blank" data-bind="visible: link != '', text: name, attr: {href: link}"></a>
+                                <span data-bind="visible: link == '', text: name"></span>
+                            </div>
+                            <div style="margin-bottom: 5px" data-bind="text: region">
+                            </div>
+                            <div data-bind="text: typeDescr">
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    </div>
+                
+
+
+
+
+            </div>
+            <div id="mRight" class="methodologyRight">
+                <script type="text/javascript">
+                    $("#mRight").load("right_column.html");
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="footer">
+        <script type="text/javascript">
+            $("#footer").load("footer.html");
+        </script>
+    </div>
+    
+    <script type="text/javascript">
+        ko.applyBindings(new models.Clients(''));
+
+    </script>
+</body>
+
+</html>

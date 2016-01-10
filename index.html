@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Main</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link href="styles/main.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="Content/themes/base/jquery-ui.css" />
+    <script src="http://public.tableausoftware.com/javascripts/api/tableau_v8.js"></script>
+    <script src="scripts/jquery-2.1.1.min.js"></script>
+    <script src="scripts/jquery-ui-1.10.3.min.js"></script>
+    <script src="scripts/knockout-2.3.0.js"></script>
+    <script src="scripts/models/index.js"></script>
+    
+    <script type="text/javascript">
+        
+
+        $(function () {
+            $("#tabs").tabs({
+                activate: function (event, ui) {
+                    selectTab(event.currentTarget.id);
+
+                }
+            });
+            
+            initializeDashboard("mapDashboard", "http://public.tableau.com/views/PortfolioHighlights/Dashboard1", 600, 960, false);
+            
+        });
+
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        <div id="header">
+            <script type="text/javascript">
+                $("#header").load("header.html");
+            </script>
+        </div>
+        <div id="main">
+            <h2 style="font-size: 1.5em"> IFC Financing to Micro, Small and Medium Enterprises - Reach Data</h2>
+            <div>
+
+
+            </div>
+            <div class="clear"></div>
+            <div id="data">
+                <div class="section clearfix">
+                    <div id="bottom-left">
+                        Lack of access to financial services is a key barrier to the growth of micro, small, medium enterprises (MSMEs). IFC is working to develop solutions to close the MSME financing gap. By partnering with many types of financial intermediaries, including microfinance institutions (MFIs), commercial banks, leasing companies, and private equity funds, IFC reaches many more small and medium enterprises (SMEs) than it could directly.
+                    </div>
+                    <!--<div id="bottom-middle">
+                        <div>Collaborating with <strong>314</strong> financial institutions (FIs) across <strong>90</strong> countries globally, including <strong>129</strong> FIs accross <strong>39</strong> International Development Assosiation (IDA) countries </div>
+
+                    </div>-->
+                    <div id="bottom-right">
+                        <div style="float: right">
+                            <h2 class="logo_title" style="font-size: 1.2em">Connect with us</h2>
+                            <div style="width: 50px; margin: 0 auto;">
+                                <div id="twitter_logo">
+                                    <a href="https://twitter.com/SMEFinanceForum" title="SME Finance Forum Twitter" target="_blank">
+                                        <div style="width: 100%; height: 100%"></div>
+                                    </a>
+                                </div>
+                                <div id="linkedin_logo">
+                                    <a href="http://www.linkedin.com/groups/SME-Finance-Forum-managed-IFC-4416977" title="SME Finance Forum LinkedIn" target="_blank">
+                                        <div style="width: 100%; height: 100%"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+
+            <div id="mapDashboard" style="width: 100%">
+                
+            </div>
+
+            
+            <!--<div id="detailsNoSelection">Select a Region to see additional details</div>-->
+            <div id="regionSelector" style="margin-right: 30px;" >
+        <div>
+            Select Region: <select id="regionSelectorCtrl" onchange="onSelectRegionChange([$(this).val()], false, true)">
+                               <option value="None">All Regions</option>
+                               <option value="East Asia and the Pacific">East Asia and the Pacific</option>
+                               <option value="Europe and Central Asia">Europe and Central Asia</option>
+                               <option value="Latin America and the Caribbean">Latin America and the Caribbean</option>
+                               <option value="Middle East and North Africa">Middle East and North Africa</option>
+                               <option value="South Asia">South Asia</option>
+                               <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>
+                               
+                           </select>
+        </div>
+    </div>
+
+
+            <div id="detailsSelection" >
+                <div id="detailsTitle" class="detailsTitle">All Regions</div>
+                <div id="tabs">
+                    <ul>
+                        <li><a id="ap" href="#tabs-1">Portfolio Composition</a></li>
+                        <li><a id="ag" href="#tabs-1">Growth Trends</a></li>
+                        <!-- <li><a id="tab3" href="#tabs-1">Committed Portfolio</a></li> -->
+                        <li><a id="tab4" href="#tabs-1">Summary Data</a></li>
+                        <li><a id="tab5" href="#tabs-1">Region Comparison</a></li>
+                    </ul>
+                    <div id="tabs-1">
+                    
+                        <!--<div id="loanSelector" title="Select loan size">
+                            <div>
+                                <div class="left" style="width: 180px">
+                                    <span class="left" style="padding-top: 3px">Select loan size:</span>
+                                    <div class="left" style="margin-left: 20px"><input style="" type="checkbox" id="cbxLoanAll" checked="checked" onchange="loanSizeParameterChanged(this)" value="All" /> All</div>
+                                </div>
+                                <div class="left" style=""><input type="checkbox" id="cbxLoanRetail" checked="checked" onchange="loanSizeParameterChanged(this)" value="Retail" /> Retail</div>
+                                <div class="clear"></div>
+                            </div>
+                            <div style="margin-left: 180px">
+                                <div class="left" style="width: 65px">
+                                    <input type="checkbox" id="cbxLoanMicro" checked="checked" onchange="loanSizeParameterChanged(this)" value="Micro" /> Micro
+                                </div>
+                                <div class="left" style="padding-top: 15px">
+
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div style="margin-left: 180px">
+                                <div class="left" style="width: 65px; padding-top: 15px">
+                                    <input type="checkbox" id="cbxLoanSme" checked="checked" onchange="loanSizeParameterChanged(this)" value="Sme" /> SME
+                                </div>
+                                <div class="left" style="padding-top: 6px">
+                                    <div><input type="checkbox" id="cbxLoanSmall" checked="checked" onchange="loanSizeParameterChanged(this)" value="Small" /> Small</div>
+                                    <div><input type="checkbox" id="cbxLoanMedium" checked="checked" onchange="loanSizeParameterChanged(this)" value="Medium" /> Medium</div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div style="margin-left: 180px"><input type="checkbox" id="cbxLoanCorporate" checked="checked" onchange="loanSizeParameterChanged(this)" value="Corporate" /> Corporate</div>
+
+                        </div>-->
+                        <div id="allRegionsDashboard" style="width: 100%"></div>
+                        <div id="detailsDashboard" style="display: none; width: 100%"></div>
+                        
+                    </div>
+                </div>
+            </div>
+                
+
+            </div>
+    </div>
+
+    <div id="footer">
+        <script type="text/javascript">
+            $("#footer").load("footer.html");
+        </script>
+    </div>
+    
+</body>
+</html>
