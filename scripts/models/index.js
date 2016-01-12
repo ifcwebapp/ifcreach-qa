@@ -184,7 +184,7 @@ function initializeDashboard(divId, url, height, width, isDetails, initDetails) 
             var v = ev.getViz();
             if (!isDetails) {
                 v.addEventListener(tableauSoftware.TableauEventName.MARKS_SELECTION, onMarksSelection);
-                initializeDashboard("allRegionsDashboard", "http://public.tableau.com/views/AllRegionsDashboard-Reachdata/PortfolioComposition", 850, 1004, true, false);
+                initializeDashboard("allRegionsDashboard", "http://public.tableau.com/views/QAAllRegionsDashboard-Reachdata/PortfolioComposition", 850, 1004, true, false);
 
 
             } else {
